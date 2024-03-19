@@ -21,7 +21,7 @@ import lombok.Setter;
         @JsonSubTypes.Type(value = Comida.class, name = "comida")
 })
 
-@Entity
+
 @AttributeOverrides({
         @AttributeOverride(name = "nome", column = @Column(name = "nome")),
         @AttributeOverride(name = "valor", column = @Column(name = "valor")),
@@ -29,14 +29,13 @@ import lombok.Setter;
 })
 public abstract class Produto {
 
-    @Column(nullable = false)
+
     private String nome;
 
-    @Column(nullable = false)
+
     private float valor;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long codigo;
 
     public Produto(String nome, float valor, Long codigo) {

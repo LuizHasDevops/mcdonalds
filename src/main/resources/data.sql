@@ -1,0 +1,9 @@
+INSERT INTO ROLE(nome) VALUES ( 'ADMIN' );
+INSERT INTO ROLE(nome) VALUES ( 'USER' );
+
+INSERT INTO USUARIO(email,nome,status,password) VALUES ( 'administrador@acme.com', 'Patolino',1 , '123456');
+INSERT INTO USUARIO(email,nome,status,password) VALUES ( 'exfuncionario@acme.com', 'Eufrasino',2 , '123456');
+
+INSERT INTO USUARIO_ROLES(ROLES_ID, USUARIO_ID) VALUES ( 1,1 );
+INSERT INTO USUARIO_ROLES(ROLES_ID, USUARIO_ID) VALUES ( 2,1 );
+INSERT INTO USUARIO_ROLES(ROLES_ID, USUARIO_ID) VALUES ( 2,2 );
