@@ -13,13 +13,16 @@ import org.slf4j.LoggerFactory;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Entity
 public class Bebida extends Produto{
 
-
+    @Column(nullable = false)
     private boolean gelada;
 
+    @Column(nullable = false)
     private float tamanho;
 
+    @Column(nullable = false)
     private String marca;
 
     private static final Logger logger = LoggerFactory.getLogger(Produto.class);

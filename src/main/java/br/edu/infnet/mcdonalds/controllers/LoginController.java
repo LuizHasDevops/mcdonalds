@@ -24,7 +24,7 @@ public class LoginController {
         model.addAttribute("usuario", new Usuario());
         model.addAttribute("message", message);
         model.addAttribute("loginSucesso", loginSucesso);
-        return "login/index";
+        return "/login";
     }
 
     @PostMapping("/efetuarLogin")
