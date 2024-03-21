@@ -21,7 +21,7 @@
                     </svg>
                 </div>
                 <div class="card-body">
-                    <form th:method="post" action="#" th:action="@{login/efetuarLogin}" th:object="${usuario}">
+                    <form th:method="post" action="login/efetuarLogin" th:object="${usuario}">
                         <div class="form-group">
                             <label for="username">Usuário</label>
                             <input type="text" class="form-control" id="username" th:field="*{email}" name="username" placeholder="Loez.Hamilton@al.infnet.edu.br">
