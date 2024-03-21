@@ -8,22 +8,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/signup")
 public class SignupController {
 
     @Autowired
     UsuarioService usuarioService;
 
-    @GetMapping("/signup")
+    @GetMapping
     public String showSignupForm(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "signup";
     }
 
-    @PostMapping("/signup")
-    public String signup(@ModelAttribute Usuario usuario, RedirectAttributes redirectAttributes) {
+    @PostMapping("/save-signup")
+    public String signup(Usuario usuario, RedirectAttributes redirectAttributes) {
         // Lógica para salvar o usuário no banco de dados
         usuarioService.save(usuario);
         redirectAttributes.addFlashAttribute("signupSuccess", true);
