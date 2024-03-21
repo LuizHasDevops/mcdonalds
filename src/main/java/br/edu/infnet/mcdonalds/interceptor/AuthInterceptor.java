@@ -16,8 +16,13 @@ public class AuthInterceptor implements HandlerInterceptor {
             System.out.println("Estou logado");
         }else{
             System.out.println("Nao estou logado");
-            response.sendRedirect("/login");
-            return false;
+            if (!request.getRequestURI().contains("/signup") && !request.getRequestURI().contains("/forgotpassword")) {
+                response.sendRedirect("/login");
+                return false;
+            }else{
+                return true;
+            }
+
         }
         return true;
     }
