@@ -3,17 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>McDonald's</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Seu CSS personalizado -->
-    <link rel="stylesheet" href="/assets/css/index.css">
+    <style>
+        /* Adicione seu estilo personalizado aqui */
+        .menu-options {
+            display: none;
+        }
+
+        .order-items {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .order-items li {
+            margin-right: 10px;
+        }
+
+        .category-options {
+            display: none;
+        }
+
+        .category-options.show {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Meu Restaurante</a>
+    <div class="container">
+        <a class="navbar-brand" href="/index">McDonald's</a>
+        <button id="menu-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -24,44 +49,31 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container mt-4">
     <div class="row">
-        <div class="col-md-3">
-            <div class="menu">
-                <h4>Menu</h4>
-                <ul>
-                    <li>
-                        <a href="#refrigerantes">Refrigerantes</a>
-                        <ul>
-                            <li><a href="#">Coca-Cola</a></li>
-                            <li><a href="#">Guaraná</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#cerveja">Cerveja</a>
-                        <ul>
-                            <li><a href="#">Heineken</a></li>
-                            <li><a href="#">Stella Artois</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#hamburguer">Hamburguer</a>
-                        <ul>
-                            <li><a href="#">Duplo Cheddar</a></li>
-                            <li><a href="#">Triplo Cheddar</a></li>
-                        </ul>
-                    </li>
-                </ul>
+        <div class="col-md-12">
+            <div id="menu-options" class="menu-options">
+                <button class="menu-option" data-category="hamburguer">Hamburguer</button>
+                <button class="menu-option" data-category="cerveja">Cerveja</button>
+                <button class="menu-option" data-category="refrigerantes">Refrigerantes</button>
+                <button id="order-btn" class="order-btn">Pedido</button>
             </div>
-        </div>
-        <div class="col-md-9">
-            <!-- Conteúdo da página -->
-            <h2 id="refrigerantes">Refrigerantes</h2>
-            <!-- Conteúdo de refrigerantes -->
-            <h2 id="cerveja">Cerveja</h2>
-            <!-- Conteúdo de cerveja -->
-            <h2 id="hamburguer">Hamburguer</h2>
-            <!-- Conteúdo de hamburguer -->
+            <div id="hamburguer-options" class="category-options">
+                <h4>Hamburguer</h4>
+                <button class="category-option">Duplo Burguer <button class="add-btn">Adicionar</button> <button class="remove-btn">Remover</button></button>
+                <button class="category-option">Triplo Burguer <button class="add-btn">Adicionar</button> <button class="remove-btn">Remover</button></button>
+            </div>
+            <div id="cerveja-options" class="category-options">
+                <h4>Cerveja</h4>
+                <button class="category-option">Stella Artois <button class="add-btn">Adicionar</button> <button class="remove-btn">Remover</button></button>
+                <button class="category-option">Heineken <button class="add-btn">Adicionar</button> <button class="remove-btn">Remover</button></button>
+            </div>
+            <div id="refrigerantes-options" class="category-options">
+                <h4>Refrigerantes</h4>
+                <button class="category-option">Coca-Cola <button class="add-btn">Adicionar</button> <button class="remove-btn">Remover</button></button>
+                <button class="category-option">Guarana <button class="add-btn">Adicionar</button> <button class="remove-btn">Remover</button></button>
+            </div>
+            <ul class="order-items"></ul>
         </div>
     </div>
 </div>
@@ -70,6 +82,51 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuOptions = document.getElementById('menu-options');
+        const orderBtn = document.getElementById('order-btn');
+        const categoryOptions = document.querySelectorAll('.category-options');
+
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            menuOptions.classList.toggle('show');
+        });
+
+        document.querySelectorAll('.menu-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const category = this.dataset.category;
+                categoryOptions.forEach(option => {
+                    option.classList.remove('show');
+                });
+                document.getElementById(category + '-options').classList.add('show');
+            });
+        });
+
+        document.querySelectorAll('.add-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const itemText = this.parentNode.textContent.trim();
+                const li = document.createElement('li');
+                li.textContent = itemText;
+                document.querySelector('.order-items').appendChild(li);
+            });
+        document.querySelectorAll('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const itemText = this.parentNode.textContent.trim();
+                const items = document.querySelectorAll('.order-items li');
+                items.forEach(item => {
+                    if (item.textContent.trim() === itemText) {
+                        item.remove();
+                    }
+                });
+            });
+        });
+
+        orderBtn.addEventListener('click', function() {
+            const orderItems = document.querySelector('.order-items');
+            orderItems.innerHTML = ''; // Limpa os itens do pedido
+        });
+    });
+</script>
 
 </body>
 </html>

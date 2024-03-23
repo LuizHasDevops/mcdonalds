@@ -1,5 +1,6 @@
 package br.edu.infnet.mcdonalds.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -12,20 +13,30 @@ import java.util.function.Predicate;
 @Setter
 @ToString
 @NoArgsConstructor
+@Data
+@Entity
+
 public class Solicitante {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigo;
 
+    @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false)
     private String cpf;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = true)@Embedded
     private List<Pedido> listaDePedido;
 
+    @Column(nullable = true)
     private Set<String> telefones;
 
+    @Column(nullable = true)
     private String[] enderecos;
 
     public Solicitante(String nome, String cpf, String email){

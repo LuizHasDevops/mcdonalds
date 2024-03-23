@@ -1,5 +1,6 @@
 package br.edu.infnet.mcdonalds.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -10,28 +11,39 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
+@Embeddable
+@Entity
+@Data
+
 public class Pedido {
 
+    @Column(nullable = false)
     private String descricao;
 
+    @Column(nullable = false)
     private LocalDateTime data;
 
+    @Column(nullable = false)
     private boolean web;
 
+    @Column(nullable = true)
     private List<Produto> listaDeProduto;
 
+    @ManyToOne
+    @JoinColumn(name = "solicitante_id")
     private Solicitante solicitante;
 
-    private int codigo;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long codigo;
 
-    public Pedido(String descricao, LocalDateTime data, boolean web, int codigo) {
+    public Pedido(String descricao, LocalDateTime data, boolean web, Long codigo) {
         this.descricao = descricao;
         this.data = data;
         this.web = web;
         this.codigo = codigo;
     }
 
-    public Pedido(String descricao, LocalDateTime data, boolean web, List<Produto> listaDeProduto, Solicitante solicitante, int codigo) throws Exception {
+    public Pedido(String descricao, LocalDateTime data, boolean web, List<Produto> listaDeProduto, Solicitante solicitante, Long codigo) throws Exception {
         this.descricao = descricao;
         this.web = web;
         this.listaDeProduto = listaDeProduto != null ? listaDeProduto : new ArrayList<>();

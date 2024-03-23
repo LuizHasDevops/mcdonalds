@@ -2,17 +2,12 @@ package br.edu.infnet.mcdonalds.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Getter
-@Setter
-@Builder
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+
 @Entity
 public class Bebida extends Produto{
 
@@ -28,19 +23,24 @@ public class Bebida extends Produto{
     private static final Logger logger = LoggerFactory.getLogger(Produto.class);
 
     public Bebida(String nome, float valor, Long codigo, boolean gelada, float tamanho, String marca){
-        super();
+        super(nome, valor, codigo);
         this.setNome(nome);
         this.setValor(valor);
         this.setCodigo(codigo);
         this.gelada = gelada;
         this.marca = marca;
-        setTamanho(tamanho);
+        this.tamanho = tamanho;
 
     }
 
     @Override
     public void preparar(){
         logger.info("Preparando o produto: {}", this.getNome());
+    }
+
+    @Override
+    public String toString() {
+        return null;
     }
 
 }
