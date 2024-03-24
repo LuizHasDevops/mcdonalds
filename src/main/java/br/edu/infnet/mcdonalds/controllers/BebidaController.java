@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.UUID;
+
 @Controller
 @RequestMapping("/bebidas")
 public class BebidaController {
@@ -41,7 +43,7 @@ public class BebidaController {
     }
 
     @GetMapping("/remover-bebida/{id}")
-    public RedirectView delete(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
+    public RedirectView delete(@PathVariable("id") UUID id, Model model, RedirectAttributes redirectAttributes){
 
         model.addAttribute("module", "cervejas");
 

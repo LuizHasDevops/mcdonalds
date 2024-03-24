@@ -18,13 +18,22 @@ VALUES
 -- Inserts para a tabela Bebida
 INSERT INTO BEBIDA(CODIGO, NOME, VALOR, GELADA, TAMANHO, MARCA)
 VALUES
-(UUID(), 'Refrigerante', 5, TRUE, 500, 'Coca-Cola'),
-(UUID(), 'Suco', 7, FALSE, 300, 'Suco de Laranja'),
-(UUID(), 'Água', 3, TRUE, 500, 'Crystal');
+(UUID(), 'Coca-Cola', 5, TRUE, 500, 'Coca-Cola'),
+(UUID(), 'Fanta', 7, FALSE, 300, 'Suco de Laranja'),
+(UUID(), 'Sprite', 3, TRUE, 500, 'Crystal');
 
 -- Inserts para a tabela Sobremesa
 INSERT INTO SOBREMESA(CODIGO, NOME, VALOR, QUANTIDADE, DOCE, INFORMACAO)
 VALUES
-(UUID(), 'Sorvete', 8, 200, TRUE, 'Sorvete de Chocolate'),
+(UUID(), 'Sundae', 8, 200, TRUE, 'Sorvete de Chocolate'),
 (UUID(), 'Bolo', 10, 1, TRUE, 'Bolo de Morango'),
 (UUID(), 'Pudim', 6, 1, TRUE, 'Pudim de Leite Condensado');
+
+-- Inserir solicitação 1
+INSERT INTO Solicitante (nome, cpf, email) VALUES ('João Silva', '123.456.789-00', 'joao.silva@example.com');
+
+-- Inserir solicitação 2
+INSERT INTO Solicitante (nome, cpf, email) VALUES ('Maria Santos', '987.654.321-00', 'maria.santos@example.com');
+
+-- Inserir solicitação 3
+INSERT INTO Solicitante (nome, cpf, email) VALUES ('Carlos Oliveira', '111.222.333-00', 'carlos.oliveira@example.com');

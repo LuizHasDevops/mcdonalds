@@ -12,5 +12,5 @@ public interface BebidaService {
     List<Bebida> findAll();
     Optional<Bebida> findById(UUID id);
     Bebida update(UUID id, Bebida atualizada);
-    void deleteById(Long id);
+    void deleteById(UUID id);
 }

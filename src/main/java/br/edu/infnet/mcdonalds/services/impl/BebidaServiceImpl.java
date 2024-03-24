@@ -38,7 +38,7 @@ public class BebidaServiceImpl implements BebidaService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         bebidaRepository.deleteById(id);
     }
 }

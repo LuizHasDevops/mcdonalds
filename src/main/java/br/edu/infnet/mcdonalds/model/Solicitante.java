@@ -15,7 +15,7 @@ public class Solicitante {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
+    private Long codigo;
 
     @Column(nullable = false)
     private String nome;
