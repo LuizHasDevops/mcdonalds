@@ -2,9 +2,12 @@ package br.edu.infnet.mcdonalds.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,8 +17,9 @@ import java.util.List;
 public class Pedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID codigo;
 
     @Column(nullable = false)
     private String descricao;
@@ -33,7 +37,7 @@ public class Pedido {
     @JoinColumn(name = "solicitante_id", referencedColumnName = "codigo")
     private Solicitante solicitante;
 
-    public Pedido(String descricao, LocalDateTime data, boolean web, int codigo) {
+    public Pedido(String descricao, LocalDateTime data, boolean web, UUID codigo) {
         this.descricao = descricao;
         this.data = data;
         this.web = web;

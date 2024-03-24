@@ -4,11 +4,13 @@ import br.edu.infnet.mcdonalds.model.Sobremesa;
 import br.edu.infnet.mcdonalds.repositories.SobremesaRepository;
 import br.edu.infnet.mcdonalds.services.SobremesaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class SobremesaServiceImpl implements SobremesaService {
 
     @Autowired

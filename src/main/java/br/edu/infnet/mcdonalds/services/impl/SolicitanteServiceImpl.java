@@ -4,11 +4,12 @@ import br.edu.infnet.mcdonalds.model.Solicitante;
 import br.edu.infnet.mcdonalds.repositories.SolicitanteRepository;
 import br.edu.infnet.mcdonalds.services.SolicitanteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@Service
 public class SolicitanteServiceImpl implements SolicitanteService {
 
     @Autowired
