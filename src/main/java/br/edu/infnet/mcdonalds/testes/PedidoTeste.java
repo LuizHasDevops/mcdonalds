@@ -8,7 +8,7 @@ public class PedidoTeste {
 
     public static void main(String[] args) throws Exception {
 
-        Solicitante solicitanteTeste1 = new Solicitante("Paulo", "11111122221", "paulo@gmail.com");
+        /*Solicitante solicitanteTeste1 = new Solicitante("Paulo", "11111122221", "paulo@gmail.com");
         Solicitante solicitanteTeste2 = new Solicitante("Luiz", "11122233345", "luiz@gmail.com");
         Solicitante solicitanteTeste3 = new Solicitante("Bruno", "22233344456", "bruno@gmail.com");
 
@@ -29,7 +29,7 @@ public class PedidoTeste {
         pedidoTeste3.setSolicitante(solicitanteTeste3);
 
         Comida comidaTeste2 = new Comida("Hamburguer", 50,0L,  30, false, "Queijo");
-        pedidoTeste1.adicionarComida(pedidoTeste1,comidaTeste2);
+        pedidoTeste1.adicionarComida(pedidoTeste1,comidaTeste2);*/
     }
 
 }

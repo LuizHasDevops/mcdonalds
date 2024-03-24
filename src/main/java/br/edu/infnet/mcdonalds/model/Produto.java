@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
@@ -22,7 +24,7 @@ import lombok.Setter;
 })
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Produto {
 
     @Column(nullable = false)
@@ -32,10 +34,11 @@ public abstract class Produto {
     private float valor;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID codigo;
 
-    public Produto(String nome, float valor, Long codigo) {
+    public Produto(String nome, float valor, UUID codigo) {
         this.nome = nome;
         this.codigo = codigo;
         setValor(valor);
