@@ -22,12 +22,12 @@ import lombok.Setter;
         @JsonSubTypes.Type(value = Comida.class, name = "comida")
 })
 
-@Entity
-@AttributeOverrides({
+@MappedSuperclass
+/*@AttributeOverrides({
         @AttributeOverride(name = "nome", column = @Column(name = "nome")),
         @AttributeOverride(name = "valor", column = @Column(name = "valor")),
         @AttributeOverride(name = "codigo", column = @Column(name = "codigo"))
-})
+})*/
 public abstract class Produto {
 
     @Column(nullable = false)

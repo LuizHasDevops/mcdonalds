@@ -1,8 +1,8 @@
 package br.edu.infnet.mcdonalds.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,19 +10,28 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
+@Entity
 public class Pedido {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int codigo;
+
+    @Column(nullable = false)
     private String descricao;
 
+    @Column(nullable = false)
     private LocalDateTime data;
 
+    @Column(nullable = false)
     private boolean web;
 
-    private List<Produto> listaDeProduto;
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private List<PedidoProduto> listaDeProduto;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "solicitante_id", referencedColumnName = "codigo")
     private Solicitante solicitante;
-
-    private int codigo;
 
     public Pedido(String descricao, LocalDateTime data, boolean web, int codigo) {
         this.descricao = descricao;
@@ -31,40 +40,25 @@ public class Pedido {
         this.codigo = codigo;
     }
 
-    public Pedido(String descricao, LocalDateTime data, boolean web, List<Produto> listaDeProduto, Solicitante solicitante, int codigo) throws Exception {
-        this.descricao = descricao;
-        this.web = web;
-        this.listaDeProduto = listaDeProduto != null ? listaDeProduto : new ArrayList<>();
-        this.solicitante = solicitante;
-        this.codigo = codigo;
-        setData(data);
-
-    }
-
-    public Pedido(String descricao, LocalDateTime data, boolean web, Produto produto, Solicitante solicitante) throws Exception {
-        this.descricao = descricao;
-        this.web = web;
-        setData(data);
-        this.listaDeProduto = new ArrayList<>();
-        if (produto != null) {
-            listaDeProduto.add(produto);
-        }
-        this.solicitante = solicitante;
-    }
-
-    public void setData(LocalDateTime data) throws Exception {
-        LocalDateTime dataAtualFinalDoDia = LocalDateTime.of(LocalDateTime.now().toLocalDate(), LocalTime.MAX);
-
-        if (data.isAfter(dataAtualFinalDoDia)) {
-            throw new Exception("Não é permitido lançar data futura.");
-        }
-        this.data = data;
-    }
-    public void adicionarProduto(Produto produto) {
+    public void adicionarComida(Pedido pedido, Comida produto) {
         if (listaDeProduto == null) {
             listaDeProduto = new ArrayList<>();
         }
-        listaDeProduto.add(produto);
+        listaDeProduto.add(new PedidoProduto(this, produto));
+    }
+
+    public void adicionarBebida(Pedido pedido, Bebida produto) {
+        if (listaDeProduto == null) {
+            listaDeProduto = new ArrayList<>();
+        }
+        listaDeProduto.add(new PedidoProduto(this, produto));
+    }
+
+    public void adicionarSobremesa(Pedido pedido, Sobremesa produto) {
+        if (listaDeProduto == null) {
+            listaDeProduto = new ArrayList<>();
+        }
+        listaDeProduto.add(new PedidoProduto(this, produto));
     }
 
 }
