@@ -13,33 +13,29 @@ import lombok.*;
 public class PedidoProduto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idPedidoProduto;
 
     @ManyToOne
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 
     @ManyToOne
-    private Comida comida;
-
-    @ManyToOne
-    private Bebida bebida;
-
-    @ManyToOne
-    private Sobremesa sobremesa;
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 
     public PedidoProduto(Pedido pedido, Comida comida) {
         this.pedido = pedido;
-        this.comida = comida;
+        this.produto = comida;
     }
 
     public PedidoProduto(Pedido pedido, Bebida bebida) {
         this.pedido = pedido;
-        this.bebida = bebida;
+        this.produto = bebida;
     }
 
     public PedidoProduto(Pedido pedido, Sobremesa sobremesa) {
         this.pedido = pedido;
-        this.sobremesa = sobremesa;
+        this.produto = sobremesa;
     }
 
 }

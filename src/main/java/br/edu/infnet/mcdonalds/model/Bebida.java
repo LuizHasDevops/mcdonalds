@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
 @Getter
 @Setter
 @Builder
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@ToString
 @Entity
 public class Bebida extends Produto{
 
@@ -25,7 +25,7 @@ public class Bebida extends Produto{
     @Column(nullable = false)
     private String marca;
 
-    private static final Logger logger = LoggerFactory.getLogger(Produto.class);
+    private static final Logger logger = LoggerFactory.getLogger(Bebida.class);
 
     public Bebida(String nome, float valor, Long codigo, boolean gelada, float tamanho, String marca){
         super();

@@ -13,7 +13,6 @@ import lombok.Setter;
 @Setter
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        //include = JsonTypeInfo.As.PROPERTY,
         property = "tipo"
 )
 @JsonSubTypes({
@@ -22,12 +21,8 @@ import lombok.Setter;
         @JsonSubTypes.Type(value = Comida.class, name = "comida")
 })
 
-@MappedSuperclass
-/*@AttributeOverrides({
-        @AttributeOverride(name = "nome", column = @Column(name = "nome")),
-        @AttributeOverride(name = "valor", column = @Column(name = "valor")),
-        @AttributeOverride(name = "codigo", column = @Column(name = "codigo"))
-})*/
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Produto {
 
     @Column(nullable = false)

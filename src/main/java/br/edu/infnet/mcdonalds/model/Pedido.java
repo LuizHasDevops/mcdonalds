@@ -26,7 +26,7 @@ public class Pedido {
     @Column(nullable = false)
     private boolean web;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "idPedidoProduto", cascade = CascadeType.ALL)
     private List<PedidoProduto> listaDeProduto;
 
     @OneToOne(cascade = CascadeType.ALL)
