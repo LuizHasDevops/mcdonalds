@@ -1,7 +1,10 @@
 package br.edu.infnet.mcdonalds.controllers;
+import br.edu.infnet.mcdonalds.interceptor.AuthInterceptor;
 import br.edu.infnet.mcdonalds.model.Usuario;
 import br.edu.infnet.mcdonalds.services.UsuarioService;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,8 @@ import java.util.Optional;
 public class LoginController {
     @Autowired
     UsuarioService usuarioService;
+
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     @GetMapping
     public String showFormLogin(Model model, @ModelAttribute("message") Object message,
                                 @ModelAttribute("login-sucesso") Object loginSucesso  ){
@@ -29,7 +34,7 @@ public class LoginController {
 
     @PostMapping("/efetuarLogin")
     public String efetuarLogin(Usuario usuario, Model model, RedirectAttributes redirectAttributes, HttpSession session){
-        System.out.println(usuario);
+        logger.info(usuario.toString());
         Optional<Usuario> usuarioOpt = usuarioService.findByEmail(usuario.getEmail());
         if(usuarioOpt.isEmpty()){
             redirectAttributes.addFlashAttribute("message", "Usuário não cadastrado");
@@ -46,6 +51,12 @@ public class LoginController {
             }
         }
 
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession request) {
+        request.setAttribute("usuarioLogado",null);
+        return "redirect:/login";
     }
 
 }

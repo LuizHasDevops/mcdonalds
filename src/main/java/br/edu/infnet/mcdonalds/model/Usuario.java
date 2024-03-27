@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import java.util.List;
 
 import java.util.Set;
 
@@ -25,6 +25,9 @@ public class Usuario {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     Set<Role> roles;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Pedido> pedidos;
 
 
 }

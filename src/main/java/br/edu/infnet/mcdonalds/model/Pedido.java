@@ -37,6 +37,10 @@ public class Pedido {
     @JoinColumn(name = "solicitante_id", referencedColumnName = "codigo")
     private Solicitante solicitante;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
     public Pedido(String descricao, LocalDateTime data, boolean web, UUID codigo) {
         this.descricao = descricao;
         this.data = data;

@@ -3,6 +3,8 @@ package br.edu.infnet.mcdonalds.controllers;
 import br.edu.infnet.mcdonalds.model.Bebida;
 import br.edu.infnet.mcdonalds.services.BebidaService;
 import br.edu.infnet.mcdonalds.services.impl.BebidaServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,8 @@ public class BebidaController {
     @Autowired
     BebidaServiceImpl bebidaService;
 
+    private static final Logger logger = LoggerFactory.getLogger(BebidaController.class);
+
     @GetMapping("/index")
     public String getAll(Model model , @ModelAttribute("sucesso") Object sucesso,
                          @ModelAttribute("sucessoDelete") Object sucessoDelete,
@@ -34,7 +38,7 @@ public class BebidaController {
 
     @PostMapping("/addBebida")
     public String add(Bebida bebida, Model model, RedirectAttributes redirectAttributes){
-        System.out.println(bebida);
+        logger.info(bebida.toString());
         bebidaService.save(bebida);
         redirectAttributes.addFlashAttribute("sucesso", true);
         redirectAttributes.addFlashAttribute("message", "Bebida adicionada com sucesso!");
