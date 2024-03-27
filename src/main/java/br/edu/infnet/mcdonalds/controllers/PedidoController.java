@@ -1,7 +1,7 @@
 package br.edu.infnet.mcdonalds.controllers;
 
-import br.edu.infnet.mcdonalds.model.Bebida;
-import br.edu.infnet.mcdonalds.services.impl.BebidaServiceImpl;
+import br.edu.infnet.mcdonalds.model.Pedido;
+import br.edu.infnet.mcdonalds.services.impl.PedidoServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,31 +14,31 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/bebidas")
-public class BebidaController {
+@RequestMapping("/pedido")
+public class PedidoController {
 
     @Autowired
-    BebidaServiceImpl bebidaService;
+    PedidoServiceImpl pedidoService;
 
     private static final Logger logger = LoggerFactory.getLogger(BebidaController.class);
 
-    @GetMapping("/listar-todas")
+    @GetMapping("/listar-todos")
     public String getAll(Model model , @ModelAttribute("sucesso") Object sucesso,
                          @ModelAttribute("sucessoDelete") Object sucessoDelete,
                          @ModelAttribute("message") Object message) {
-        model.addAttribute("module", "bebidas");
-        model.addAttribute("bebidas", bebidaService.findAll());
+        model.addAttribute("module", "pedidos");
+        model.addAttribute("pedidos", pedidoService.findAll());
 
         model.addAttribute(sucesso);
         model.addAttribute(sucessoDelete);
 
-        return "bebidas/index";
+        return "redirect:/meus_pedidos";
     }
 
     @PostMapping("/adicionar")
-    public String add(Bebida bebida, Model model, RedirectAttributes redirectAttributes){
-        logger.info(bebida.toString());
-        bebidaService.save(bebida);
+    public String add(Pedido pedido, Model model, RedirectAttributes redirectAttributes){
+        logger.info(pedido.toString());
+        pedidoService.save(pedido);
         redirectAttributes.addFlashAttribute("sucesso", true);
         redirectAttributes.addFlashAttribute("message", "Bebida adicionada com sucesso!");
 
@@ -51,7 +51,7 @@ public class BebidaController {
         model.addAttribute("module", "cervejas");
 
         try{
-            bebidaService.deleteById(id);
+            pedidoService.deleteById(id);
             redirectAttributes.addFlashAttribute("sucesso", true);
             redirectAttributes.addFlashAttribute("message", "Bebida deletada com sucesso!");
         }catch (Exception ex){
@@ -61,11 +61,10 @@ public class BebidaController {
     }
 
     @PostMapping("/edit")
-    public String update(Bebida bebida, Model model, RedirectAttributes redirectAttributes){
-        bebidaService.save(bebida);
+    public String update(Pedido pedido, Model model, RedirectAttributes redirectAttributes){
+        pedidoService.save(pedido);
         redirectAttributes.addFlashAttribute("sucesso", true);
         redirectAttributes.addFlashAttribute("message", "Bebida Editada com sucesso!");
         return "redirect:index";
     }
-
 }
